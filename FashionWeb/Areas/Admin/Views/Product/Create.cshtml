@@ -1,0 +1,88 @@
+﻿@using FashionWeb.Utilities;
+@model FashionWeb.Models.Product;
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Basic form elements</h4>
+                        <p class="card-description"> Basic form elements </p>
+                        <form class="forms-sample" asp-action="Create" method="post">
+                            <div class="form-group">
+                                <label asp-for="ProductName">Tên sản phẩm</label>
+                                <input type="text" class="form-control" asp-for="ProductName" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Hình ảnh sản phẩm</label>
+                                <div class="input-group col-xs-12">
+                                    <div class="input-group-append">
+                                        <button class="file-upload-browse btn btn-gradient-primary" type="button" onclick="openDialog()">Tải lên</button>
+                                    </div>
+                                    <input type="text" class="form-control file-upload-info" asp-for="Image" id="file_input" aria-describedby="button-addon2" placeholder="Upload Image">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        @Html.CheckBox("IsActive", false)Hiển thị lên trang
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price">Giá bán</label>
+                                <input class="form-control" asp-for="Price" placeholder="Price">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Discount">Giảm giá</label>
+                                <input type="text" class="form-control" asp-for="Discount" placeholder="% Discount">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ColorID">Chọn mục</label>
+                                <select asp-for="ColorID"
+                                        class="form-control"
+                                        asp-items="@(new SelectList(ViewBag.color, "Value", "Text"))">
+                                </select>
+                                <span asp-validation-for="ColorID" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SizeID">Chọn mục</label>
+                                <select asp-for="SizeID"
+                                        class="form-control"
+                                        asp-items="@(new SelectList(ViewBag.size, "Value", "Text"))">
+                                </select>
+                                <span asp-validation-for="SizeID" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description">Thêm mô tả</label>
+                                <textarea class="form-control" asp-for="Description" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Information">Thêm thông tin</label>
+                                <textarea class="form-control" asp-for="Information" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CategoryID">Chọn danh mục</label>
+                                <select asp-for="CategoryID"
+                                        class="form-control"
+                                        asp-items="@(new SelectList(ViewBag.CategoryList, "Value", "Text"))">
+                                </select>
+                                <span asp-validation-for="CategoryID" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group d-none">
+                                <input asp-for="CreatedDate" class="form-control" value="@Functions.getCurrentDate()" />
+                            </div>
+                            <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                            <button class="btn btn-light" href="javascript:history.back()">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    var summerNote = new FashionWeb.Areas.Admin.Models.SummerNote("");
+    <partial name="_SummerNote" model="summerNote" />
+}

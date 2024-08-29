@@ -1,0 +1,15 @@
+﻿@model FashionWeb.Models.Contact
+<main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div style="margin-left:30px; margin-top:20px; height:500px">
+                        <h3 class="mb-4">@Html.DisplayFor(model => model.Title)</h3>
+                        <p>@Html.Raw(Model.Message)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

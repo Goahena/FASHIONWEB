@@ -1,0 +1,28 @@
+﻿@model IList<Menu>
+
+<div class="navbar-nav mr-auto py-0">
+    <div class="active"></div>
+    @foreach(var menu in Model.Where(m => m.Levels == 1).OrderBy(n => n.MenuOrder))
+    {
+        var Pid = menu.MenuID;
+
+        var Smenu = Model.Where(p => p.ParentID == Pid).OrderBy(p => p.MenuOrder).ToList();
+
+        @if(Smenu.Count == 0)
+        {
+            <a  asp-controller="@menu.ControllerName" asp-action="@menu.ActionName" class="nav-item nav-link">@menu.MenuName</a>
+        }
+        else
+        {
+            @foreach(var smn in Smenu)
+            {
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@menu.MenuName <i class="fa fa-angle-down mt-1"></i></a>
+                    <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                            <a href="@smn.Link" class="dropdown-item">@smn.MenuName</a>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>

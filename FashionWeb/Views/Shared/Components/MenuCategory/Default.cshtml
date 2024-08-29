@@ -1,0 +1,16 @@
+﻿@model IList<Category>
+@using FashionWeb.Utilities
+<nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+    <div class="navbar-nav w-100">
+        <div class="nav-item dropdown dropright">
+            @foreach(var menu in Model.OrderBy(n => n.MenuOrder))
+            {
+
+                var id = menu.CategoryID;
+                var Smenu = Model.OrderBy(p => p.MenuOrder).ToList();
+
+                <a href="/Product/CategorySearch/?categoryId=@menu.CategoryID" class="nav-item nav-link">@menu.CategoryName</a>
+            }
+         </div>
+     </div>
+</nav>
